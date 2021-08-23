@@ -29,5 +29,6 @@ jobs:
         uses: actions/setup-java@v2.2.0
         with:
           java-version: 11
+          distribution: 'temurin'
       - name: Build debug APK
         run: bash ./gradlew assembleDebug --stacktrace
