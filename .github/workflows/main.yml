@@ -40,7 +40,11 @@ jobs:
         run: |
              cd app/build/outputs/apk/release/
              ls
-             
+      - name: getfilename
+        run: |
+            apk = $(ls -r *.apk | head -n 1)
+            echo $apk
+            echo "::set-output name=apk_filename::$apk"
       - name: Setup Ossutil
         uses: manyuanrong/setup-ossutil@v2.0
         with:
@@ -50,7 +54,7 @@ jobs:
           access-key-id: ${{secrets.RELEASE_BUCKET_ACCESSKEYID}}
           # AccessKeySceret
           access-key-secret:  ${{secrets.RELEASE_BUCKET_ACCESSKEYSECRET}}
-      - run: ossutil cp -rf app/build/outputs/apk/release/app-release.apk oss://troncell-releases/AppPod/Android/
+      - run: ossutil cp -rf app/build/outputs/apk/release/${{steps.getfilename.outputs.apk_filename}} oss://troncell-releases/AppPod/Android/
       
       - name: dingtalk robot message
         uses: fifsky/dingtalk-action@master
@@ -60,5 +64,5 @@ jobs:
           content: |
             # Tips
             ## DevOps
-            > [AppPod Relasess](https://releases.sensingstore.com/AppPod/Android/apppod_3.0.0_beta1.apk)
+            > [AppPod Relasess](https://releases.sensingstore.com/AppPod/Android/${{steps.getfilename.outputs.apk_filename}})
             > ^_^
