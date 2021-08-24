@@ -32,7 +32,7 @@ jobs:
 
             
       - name: printfilename
-        run: echo "${{steps.getfile.outputs.version}}"
+        run: echo "The version is ${{ steps.getfile.outputs.version}}"
 
       - name: ls
         run: |
