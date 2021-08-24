@@ -25,15 +25,14 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
       
-      - name: getfilename1
+      - name: getfile
         run: |
             value="$(ls -r *.gradle | head -n 1)"
-            echo "::set-output name=version::123123"
+            echo "::set-output name=version::abcc"
 
             
       - name: printfilename
-        run: |
-            echo "${{steps.getfilename1.outputs.version}}"
+        run: echo "${{steps.getfile.outputs.version}}"
 
       - name: ls
         run: |
