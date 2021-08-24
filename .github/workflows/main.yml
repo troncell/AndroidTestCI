@@ -30,6 +30,10 @@ jobs:
             echo "APK = ls -r *.gradle | head -n 1"
             echo "::set-output name=apk_filename::$APK"
             echo $APK
+            
+      - name: printfilename
+        run: |
+            echo ${{steps.getfilename.outputs.apk_filename}}
 
       - name: ls
         run: |
@@ -48,9 +52,7 @@ jobs:
             cd app/build/outputs/apk/release/
             echo "APK = $(ls -r *.apk | head -n 1)"
             echo "::set-output name=apk_filename::$APK"
-      - name: printfilename
-        run: |
-            echo ${{steps.getfilename.outputs.apk_filename}}
+
         
       - name: Setup Ossutil
         uses: manyuanrong/setup-ossutil@v2.0
