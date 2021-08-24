@@ -25,6 +25,9 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         signingConfig signingConfigs.release
+
+        archivesBaseName = "$applicationId-v$versionName"
+
     }
 
 
