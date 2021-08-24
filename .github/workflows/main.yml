@@ -24,17 +24,7 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-      
-      - name: getfile
-        id: getfile
-        run: |
-            value="$(ls -r *.gradle | head -n 1)"
-            echo "::set-output name=version::$(ls -r *.gradle | head -n 1)"
-
-            
-      - name: printfilename
-        run: echo "The version is ${{ steps.getfile.outputs.version}}"
-
+              
       - name: ls
         run: |
              cd keystore
@@ -48,10 +38,12 @@ jobs:
         run: bash ./gradlew assembleRelease --stacktrace
 
       - name: getfilename
+        id: getfilename
         run: |
-            cd app/build/outputs/apk/release/
-            echo "APK = $(ls -r *.apk | head -n 1)"
-            echo "::set-output name=apk_filename::$APK"
+            echo "::set-output name=apk_filename::$(ls -r *.gradle | head -n 1)"
+            
+      - name: printfilename
+        run: echo "The apk is ${{ steps.getfilename.outputs.apk_filename}}"
 
         
       - name: Setup Ossutil
