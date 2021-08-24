@@ -29,7 +29,7 @@ jobs:
         id: getfile
         run: |
             value="$(ls -r *.gradle | head -n 1)"
-            echo "::set-output name=version::abcc"
+            echo "::set-output name=version::$(ls -r *.gradle | head -n 1)"
 
             
       - name: printfilename
