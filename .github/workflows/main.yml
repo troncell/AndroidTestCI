@@ -36,12 +36,10 @@ jobs:
           distribution: 'temurin'
       - name: Build debug APK
         run: bash ./gradlew assembleRelease --stacktrace
-      - name: ls
-        run: |
-             cd app/build/outputs/apk/release/
-             ls
+
       - name: getfilename
         run: |
+            cd app/build/outputs/apk/release/
             apk = $(ls -r *.apk | head -n 1)
             echo $apk
             echo "::set-output name=apk_filename::$apk"
