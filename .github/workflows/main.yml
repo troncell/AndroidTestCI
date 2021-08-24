@@ -36,7 +36,7 @@ jobs:
       - name: Setup Java JDK
         uses: actions/setup-java@v2.2.0
         with:
-          java-version: 11
+          java-version: 18
           distribution: 'temurin'
           
       - name: Build release APK
@@ -74,3 +74,7 @@ jobs:
             ## DevOps
             > [AppPod Relasess](https://releases.sensingstore.com/AppPod/Android/${{steps.getfilename.outputs.apk_filename}})
             > ^_^
+      - name: The job has failed
+        if: ${{ failure() }}
+        run: echo "failed abc"
+        
