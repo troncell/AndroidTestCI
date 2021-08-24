@@ -4,6 +4,16 @@ plugins {
 }
 
 android {
+    def keyProps = new Properties()
+    keyProps.load(new FileInputStream(rootProject.file("keystore/keystore.properties")))
+    signingConfigs {
+        release {
+            keyAlias keyProps['keyAlias']
+            keyPassword keyProps['keyPassword']
+            storeFile file(keyProps['storeFile'])
+            storePassword keyProps['storePassword']
+        }
+    }
     compileSdk 30
 
     defaultConfig {
@@ -14,22 +24,12 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        signingConfig signingConfigs.release
     }
 
-    def keyProps = new Properties()
-    def keyPropsFile = rootProject.file('keystore/keystore.properties')
-    if (keyPropsFile.exists()) {
-        keyProps.load(new FileInputStream(keyPropsFile))
-    }
 
-    signingConfigs {
-        release {
-            keyAlias keyProps['keyAlias']
-            keyPassword keyProps['keyPassword']
-            storeFile keyProps['storeFile'] ? file(keyProps['storeFile']) : null
-            storePassword keyProps['storePassword']
-        }
-    }
+
+
 
 
     buildTypes {
