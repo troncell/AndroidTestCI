@@ -24,26 +24,30 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
+        with:
+          submodules: true
               
       - name: ls
         run: |
              cd keystore
              ls
+             
       - name: Setup Java JDK
         uses: actions/setup-java@v2.2.0
         with:
           java-version: 11
           distribution: 'temurin'
-      - name: Build debug APK
+          
+      - name: Build release APK
         run: bash ./gradlew assembleRelease --stacktrace
 
-      - name: getfilename
+      - name: Get APK Name
         id: getfilename
         run: |
             cd app/build/outputs/apk/release/
             echo "::set-output name=apk_filename::$(ls -r *.apk | head -n 1)"
             
-      - name: printfilename
+      - name: Log Apk Name
         run: echo "The apk is ${{ steps.getfilename.outputs.apk_filename}}"
 
         
