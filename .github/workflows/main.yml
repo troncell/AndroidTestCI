@@ -31,4 +31,4 @@ jobs:
           java-version: 11
           distribution: 'temurin'
       - name: Build debug APK
-        run: bash ./gradlew assembleDebug --stacktrace
+        run: bash ./gradlew assembleRelease --stacktrace
