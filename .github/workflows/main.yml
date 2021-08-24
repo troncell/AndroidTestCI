@@ -27,7 +27,7 @@ jobs:
       
       - name: getfilename1
         run: |
-            echo "::set-output name=apkfilename::$(ls -r *.gradle | head -n 1)"
+            APK=`$(ls -r *.gradle | head -n 1)`
             
       - name: printfilename
         run: |
