@@ -29,6 +29,7 @@ jobs:
         run: |
             echo "APK = ls -r *.gradle | head -n 1"
             echo "::set-output name=apk_filename::$APK"
+            echo $APK
 
       - name: ls
         run: |
