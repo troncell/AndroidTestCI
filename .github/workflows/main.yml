@@ -29,9 +29,10 @@ jobs:
         run: |
             value="$(ls -r *.gradle | head -n 1)"
             
+            
       - name: printfilename
         run: |
-            echo "${{steps.getfilename1.outputs.apkfilename}}"
+            echo "${{steps.getfilename1.outputs.value}}"
 
       - name: ls
         run: |
