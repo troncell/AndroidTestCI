@@ -28,7 +28,8 @@ jobs:
           submodules: keystore
 
       - name: ls
-        run: |
-             cd keystore
-             ls
+        run: cd keystore
+      
+      - name: ls
+        run: ls
 
