@@ -40,3 +40,14 @@ jobs:
         run: |
              cd app/build/outputs/apk/release/
              ls
+             
+      - name: Setup Ossutil
+        uses: manyuanrong/setup-ossutil@v2.0
+        with:
+          # 填写Bucket所在地域的域名信息，可参考访问域名和数据中心。
+          endpoint: oss-cn-shanghai.aliyuncs.com	
+          # AccessKey I
+          access-key-id: ${{secrets.RELEASE_BUCKET_ACCESSKEYID}}
+          # AccessKeySceret
+          access-key-secret:  ${{secrets.RELEASE_BUCKET_ACCESSKEYSECRET}}
+      - run: ossutil cp -rf app/build/outputs/apk/release/app-release.apk oss://troncell-releases/AppPod/Android/
