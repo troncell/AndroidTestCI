@@ -40,7 +40,7 @@ jobs:
       - name: getfilename
         id: getfilename
         run: |
-            echo "::set-output name=apk_filename::$(ls -r *.gradle | head -n 1)"
+            echo "::set-output name=apk_filename::$(ls -r *.apk | head -n 1)"
             
       - name: printfilename
         run: echo "The apk is ${{ steps.getfilename.outputs.apk_filename}}"
