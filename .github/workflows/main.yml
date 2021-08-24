@@ -51,3 +51,14 @@ jobs:
           # AccessKeySceret
           access-key-secret:  ${{secrets.RELEASE_BUCKET_ACCESSKEYSECRET}}
       - run: ossutil cp -rf app/build/outputs/apk/release/app-release.apk oss://troncell-releases/AppPod/Android/
+      
+      - name: dingtalk robot message
+        uses: fifsky/dingtalk-action@master
+        with:
+          url: ${{ secrets.DINGTALK_WEBHOOK}}
+          type: markdown
+          content: |
+            # Tips
+            ## DevOps
+            > [AppPod Relasess](https://releases.sensingstore.com/AppPod/Android/apppod_3.0.0_beta1.apk)
+            > ^_^
