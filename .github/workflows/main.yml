@@ -31,7 +31,7 @@ jobs:
             
       - name: printfilename
         run: |
-            echo ${{steps.getfilename.outputs.apk_filename}}
+            echo ${{steps.getfilename1.outputs.apk_filename}}
 
       - name: ls
         run: |
