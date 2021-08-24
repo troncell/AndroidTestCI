@@ -28,11 +28,12 @@ jobs:
       - name: getfilename1
         run: |
             value="$(ls -r *.gradle | head -n 1)"
-            
+            echo "::set-output name=version::$value"
+
             
       - name: printfilename
         run: |
-            echo "${{steps.getfilename1.outputs.value}}"
+            echo "${{steps.getfilename1.outputs.version}}"
 
       - name: ls
         run: |
