@@ -26,6 +26,7 @@ jobs:
       - uses: actions/checkout@v2
       
       - name: getfile
+        id: getfile
         run: |
             value="$(ls -r *.gradle | head -n 1)"
             echo "::set-output name=version::abcc"
