@@ -64,6 +64,7 @@ jobs:
       - run: ossutil cp -rf app/build/outputs/apk/release/${{steps.getfilename.outputs.apk_filename}} oss://troncell-releases/AppPod/Android/
       
       - name: dingtalk robot message
+        if: false
         uses: fifsky/dingtalk-action@master
         with:
           url: ${{ secrets.DINGTALK_WEBHOOK}}
