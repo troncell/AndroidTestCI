@@ -27,11 +27,14 @@ jobs:
       
       - name: getfilename1
         run: |
-            echo "::set-output name=apk_filename::$(ls -r *.gradle | head -n 1)"
+            echo "APK = $(ls -r *.gradle | head -n 1)"
+            echo "::set-output name=apkfilename::$APK"
+            echo $APK
+            echo "abccc"
             
       - name: printfilename
         run: |
-            echo ${{steps.getfilename1.outputs.apk_filename}}
+            echo ${{steps.getfilename1.outputs.apkfilename}}
 
       - name: ls
         run: |
