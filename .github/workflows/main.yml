@@ -27,7 +27,7 @@ jobs:
         run: echo "$GITHUB_REF"
       
       - name: c
-          run: abc
+        run: cd abc
       
       - uses: actions/checkout@v2
         with:
