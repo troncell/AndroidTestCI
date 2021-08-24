@@ -16,6 +16,22 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    def keyProps = new Properties()
+    def keyPropsFile = rootProject.file('keystore/keystore.properties')
+    if (keyPropsFile.exists()) {
+        keyProps.load(new FileInputStream(keyPropsFile))
+    }
+
+    signingConfigs {
+        release {
+            keyAlias keyProps['keyAlias']
+            keyPassword keyProps['keyPassword']
+            storeFile keyProps['storeFile'] ? file(keyProps['storeFile']) : null
+            storePassword keyProps['storePassword']
+        }
+    }
+
+
     buildTypes {
         release {
             minifyEnabled false
