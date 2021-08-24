@@ -27,7 +27,7 @@ jobs:
       
       - name: getfilename1
         run: |
-            value=`"$(ls -r *.gradle | head -n 1)"`
+            value="$(ls -r *.gradle | head -n 1)"
             
       - name: printfilename
         run: |
