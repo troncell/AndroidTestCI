@@ -29,14 +29,4 @@ jobs:
         run: |
              cd keystore
              ls
-      - name: Setup Java JDK
-        uses: actions/setup-java@v2.2.0
-        with:
-          java-version: 11
-          distribution: 'temurin'
-      - name: Build debug APK
-        run: bash ./gradlew assembleRelease --stacktrace
-      - name: ls
-        run: |
-             cd app/build/outputs/apk/release/
-             ls
+
