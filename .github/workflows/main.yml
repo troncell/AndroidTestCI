@@ -25,6 +25,8 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
+      - name: ls
+        run: ls
       - name: Setup Java JDK
         uses: actions/setup-java@v2.2.0
         with:
@@ -32,3 +34,7 @@ jobs:
           distribution: 'temurin'
       - name: Build debug APK
         run: bash ./gradlew assembleRelease --stacktrace
+      - name: ls
+        run: |
+             cd app/build/outputs/apk/release/
+             ls
