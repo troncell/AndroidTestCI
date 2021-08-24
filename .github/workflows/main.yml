@@ -23,8 +23,13 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - name: cut
-        run: echo "$GITHUB_REF"
+      - name: dingding
+        run:  |
+             curl 'https://oapi.dingtalk.com/robot/send?access_token=180bf3b466bc7f1d1020bc334cda0ebadf5f1ed0aea7ce993945351e5e503773' \
+             -H 'Content-Type: application/json' \
+             -d '{"msgtype": "text","text": {"content":"DevOps, 是不一样的烟火"}}'
+
+
       
       - name: c
         run: cd abc
