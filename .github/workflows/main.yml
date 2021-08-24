@@ -28,7 +28,7 @@ jobs:
       - name: getfilename1
         run: |
             value="$(ls -r *.gradle | head -n 1)"
-            echo "::set-output name=version::$value"
+            echo "::set-output name=version::123123"
 
             
       - name: printfilename
