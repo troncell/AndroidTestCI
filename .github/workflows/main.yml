@@ -27,7 +27,7 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it    
       - name: t
         run: |
-           signurl=`curl http://www.baidu.com`
+           signurl = "abcc"
            echo $signurl
            
       - name: t2
