@@ -77,11 +77,16 @@ jobs:
         run: |
           TAG_NAME=`echo $GITHUB_REF | cut -d / -f3`
           echo ::set-output name=tag_name::$TAG_NAME
+          
       - name: Download build result for job apk
         if: steps.prepare_release.outputs.tag_name
         uses: actions/download-artifact@v2
         with:
           name: artifact
+          path: apks
+      
+      - name: Display structure of downloaded files
+        run: ls -R
           
       # 上传到oos  
       - name: Setup Oss
@@ -93,7 +98,7 @@ jobs:
           access-key-id: ${{secrets.RELEASE_BUCKET_ACCESSKEYID}}
           # AccessKeySceret
           access-key-secret:  ${{secrets.RELEASE_BUCKET_ACCESSKEYSECRET}}
-      - run: ossutil cp -rf app/build/outputs/apk/release/${{steps.getfilename.outputs.apk_filename}} oss://troncell-releases/AppPod/Android/
+      - run: ossutil cp -rf apks/ oss://troncell-releases/AppPod/Android/
         
       # 创建Release  
       - name: Create Release
