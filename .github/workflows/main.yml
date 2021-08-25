@@ -25,13 +25,6 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it    
-      - name: t
-        run: |
-           signurl = "abcc"
-           echo $signurl
-           
-      - name: t2
-        run: cd abc/
            
     
       - uses: actions/checkout@v2
@@ -110,7 +103,7 @@ jobs:
           access-key-secret:  ${{secrets.RELEASE_BUCKET_ACCESSKEYSECRET}}
       - run: |
              ossutil cp -rf apks/ oss://troncell-releases/AppPod/Android/
-             signurl = $(ossutil sign oss://troncell-releases/AppPod/Android/${{needs.build.outputs.apk_filename}} --timeout 3600)
+             signurl=$(ossutil sign oss://troncell-releases/AppPod/Android/${{needs.build.outputs.apk_filename}} --timeout 3600)
              echo 'signurl is $signurl'
              
              
