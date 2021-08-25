@@ -101,7 +101,7 @@ jobs:
           access-key-secret:  ${{secrets.RELEASE_BUCKET_ACCESSKEYSECRET}}
       - run: |
              ossutil cp -rf apks/ oss://troncell-releases/AppPod/Android/
-             ossutil set-acl oss://troncell-releases/AppPod/Android/${{needs.build.outputs.apk_filename}} public
+             ossutil set-acl oss://troncell-releases/AppPod/Android/${{needs.build.outputs.apk_filename}} public-read
         
       # 创建Release  
       - name: Create Release
