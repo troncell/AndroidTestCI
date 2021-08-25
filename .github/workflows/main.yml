@@ -78,10 +78,5 @@ jobs:
         run:  |
              curl '${{ secrets.DINGTALK_WEBHOOK}}' \
              -H 'Content-Type: application/json' \
-             -d '{"msgtype": "link", \
-                "link": {\
-                    "text": "新版本发布", \
-                    "title": "DevOps", \
-                    "messageUrl": "http://www.baidu.com" \
-                }}'
+             -d '{"msgtype": "link",' "link": {"text": "新版本发布", "title": "DevOps",  "messageUrl": "http://www.baidu.com" }}'
         
