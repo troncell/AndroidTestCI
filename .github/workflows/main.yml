@@ -27,7 +27,7 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it    
       - name: t
         run: |
-           signurl = abc
+           signurl=`abc`
            
       - name: t2
         run: cd abc/
