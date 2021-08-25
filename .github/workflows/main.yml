@@ -22,10 +22,7 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it  
-      - name: error
-        run: cd abc
-      
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it        
       - uses: actions/checkout@v2
         with:
           submodules: true
@@ -71,12 +68,13 @@ jobs:
         run:  |
              curl '${{ secrets.DINGTALK_WEBHOOK}}' \
              -H 'Content-Type: application/json' \
-             -d '{"msgtype": "text","text": {"content":"DevOps, ${{ github.repository }} Success"}}'
+             -d '{"msgtype": "link","link": {"text": "${{github.repository}} ${{steps.getfilename.outputs.apk_filename}} 发布", "title": "DevOps",  "messageUrl": "https://releases.sensingstore.com/AppPod/Android/${{steps.getfilename.outputs.apk_filename" }}'
+
       
       - name: The job has failed
         if: ${{ failure() }}
         run:  |
              curl '${{ secrets.DINGTALK_WEBHOOK}}' \
              -H 'Content-Type: application/json' \
-             -d '{"msgtype": "link","link": {"text": "新版本发布", "title": "DevOps",  "messageUrl": "http://www.baidu.com" }}'
+             -d '{"msgtype": "text","text": {"content":"DevOps, ${{ github.repository }} Success"}}'
         
