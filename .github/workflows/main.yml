@@ -24,7 +24,16 @@ jobs:
       apk_filename: ${{ steps.getfilename.outputs.apk_filename }}
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it        
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it    
+      - name: t
+        run: |
+           signurl = abc
+           echo 'signurl is $signrul'
+           
+      - name: t2
+        run: cd abc/
+           
+    
       - uses: actions/checkout@v2
         with:
           submodules: true
