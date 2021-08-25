@@ -23,9 +23,12 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: repo
+        run: echo '${{ github.repository }}'
+      
       - name: dingding
         run:  |
-             curl 'https://oapi.dingtalk.com/robot/send?access_token=180bf3b466bc7f1d1020bc334cda0ebadf5f1ed0aea7ce993945351e5e503773' \
+             curl '${{ secrets.DINGTALK_WEBHOOK}}' \
              -H 'Content-Type: application/json' \
              -d '{"msgtype": "text","text": {"content":"DevOps, 是不一样的烟火"}}'
 
@@ -74,18 +77,13 @@ jobs:
           access-key-secret:  ${{secrets.RELEASE_BUCKET_ACCESSKEYSECRET}}
       - run: ossutil cp -rf app/build/outputs/apk/release/${{steps.getfilename.outputs.apk_filename}} oss://troncell-releases/AppPod/Android/
       
-      - name: dingtalk robot message
-        if: false
-        uses: fifsky/dingtalk-action@master
-        with:
-          url: ${{ secrets.DINGTALK_WEBHOOK}}
-          type: markdown
-          content: |
-            # Tips
-            ## DevOps
-            > [AppPod Relasess](https://releases.sensingstore.com/AppPod/Android/${{steps.getfilename.outputs.apk_filename}})
-            > ^_^
+      - name: message
+        run: echo '[AppPod Relasess](https://releases.sensingstore.com/AppPod/Android/${{steps.getfilename.outputs.apk_filename}})'
+      
       - name: The job has failed
         if: ${{ failure() }}
-        run: echo "failed abc"
+        run:  |
+             curl '${{ secrets.DINGTALK_WEBHOOK}}' \
+             -H 'Content-Type: application/json' \
+             -d '{"msgtype": "text","text": {"content":"DevOps, 是不一样的烟火"}}'
         
