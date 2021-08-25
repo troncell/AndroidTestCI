@@ -22,19 +22,8 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - name: repo
-        run: echo '${{ github.repository }}'
-      
-      - name: dingding
-        run:  |
-             curl '${{ secrets.DINGTALK_WEBHOOK}}' \
-             -H 'Content-Type: application/json' \
-             -d '{"msgtype": "text","text": {"content":"DevOps, 是不一样的烟火"}}'
-
-
-      
-      - name: c
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it  
+      - name: error
         run: cd abc
       
       - uses: actions/checkout@v2
@@ -42,7 +31,7 @@ jobs:
           submodules: true
           token: ${{secrets.ACCESS_TOKEN}}
               
-      - name: ls
+      - name: Check Keystore
         run: |
              cd keystore
              ls
@@ -77,13 +66,22 @@ jobs:
           access-key-secret:  ${{secrets.RELEASE_BUCKET_ACCESSKEYSECRET}}
       - run: ossutil cp -rf app/build/outputs/apk/release/${{steps.getfilename.outputs.apk_filename}} oss://troncell-releases/AppPod/Android/
       
-      - name: message
-        run: echo '[AppPod Relasess](https://releases.sensingstore.com/AppPod/Android/${{steps.getfilename.outputs.apk_filename}})'
+      - name: The job has success
+        if: ${{ success() }}
+        run:  |
+             curl '${{ secrets.DINGTALK_WEBHOOK}}' \
+             -H 'Content-Type: application/json' \
+             -d '{"msgtype": "text","text": {"content":"DevOps, ${{ github.repository }} Success"}}'
       
       - name: The job has failed
         if: ${{ failure() }}
         run:  |
              curl '${{ secrets.DINGTALK_WEBHOOK}}' \
              -H 'Content-Type: application/json' \
-             -d '{"msgtype": "text","text": {"content":"DevOps, ${{ github.repository }} Failed"}}'
+             -d '{"msgtype": "link", \
+                "link": {\
+                    "text": "新版本发布", \
+                    "title": "DevOps", \
+                    "messageUrl": "http://www.baidu.com" \
+                }}'
         
