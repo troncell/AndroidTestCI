@@ -68,7 +68,7 @@ jobs:
         run:  |
              curl '${{ secrets.DINGTALK_WEBHOOK}}' \
              -H 'Content-Type: application/json' \
-             -d '{"msgtype": "link","link": {"text": "${{github.repository}} ${{steps.getfilename.outputs.apk_filename}} 发布", "title": "DevOps",  "messageUrl": "https://releases.sensingstore.com/AppPod/Android/${{steps.getfilename.outputs.apk_filename}}" }}'
+             -d '{"msgtype": "link","link": {"text": "${{steps.getfilename.outputs.apk_filename}} 发布", "title": "DevOps,信息发布系统",  "messageUrl": "https://releases.sensingstore.com/AppPod/Android/${{steps.getfilename.outputs.apk_filename}}" }}'
 
       
       - name: The job has failed
@@ -76,5 +76,5 @@ jobs:
         run:  |
              curl '${{ secrets.DINGTALK_WEBHOOK}}' \
              -H 'Content-Type: application/json' \
-             -d '{"msgtype": "text","text": {"content":"DevOps, ${{ github.repository }} Failed"}}'
+             -d '{"msgtype": "text","text": {"content":"DevOps,信息发布系统 ${{ github.repository }} Failed"}}'
         
