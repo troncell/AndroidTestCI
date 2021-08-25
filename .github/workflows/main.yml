@@ -85,5 +85,5 @@ jobs:
         run:  |
              curl '${{ secrets.DINGTALK_WEBHOOK}}' \
              -H 'Content-Type: application/json' \
-             -d '{"msgtype": "text","text": {"content":"DevOps, 是不一样的烟火"}}'
+             -d '{"msgtype": "text","text": {"content":"DevOps, ${{ github.repository }} Failed"}}'
         
