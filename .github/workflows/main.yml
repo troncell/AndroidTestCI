@@ -36,7 +36,7 @@ jobs:
       - name: Setup Java JDK
         uses: actions/setup-java@v2.2.0
         with:
-          java-version: 18
+          java-version: 11
           distribution: 'temurin'
           
       - name: Build release APK
@@ -76,5 +76,5 @@ jobs:
         run:  |
              curl '${{ secrets.DINGTALK_WEBHOOK}}' \
              -H 'Content-Type: application/json' \
-             -d '{"msgtype": "text","text": {"content":"DevOps, ${{ github.repository }} Success"}}'
+             -d '{"msgtype": "text","text": {"content":"DevOps, ${{ github.repository }} Failed"}}'
         
