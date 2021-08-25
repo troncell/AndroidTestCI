@@ -28,7 +28,6 @@ jobs:
       - name: t
         run: |
            signurl = abc
-           echo 'signurl is $signrul'
            
       - name: t2
         run: cd abc/
