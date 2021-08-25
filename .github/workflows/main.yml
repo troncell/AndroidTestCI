@@ -20,7 +20,8 @@ jobs:
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-
+    outputs:
+      apk_filename: ${{ steps.getfilename.outputs.apk_filename }}
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it        
@@ -112,7 +113,7 @@ jobs:
           release_name: Release ${{steps.prepare_release.outputs.tag_name}} 
           draft: false
           prerelease: false
-          body: 点击下载 [${{steps.getfilename.outputs.apk_filename}}](https://releases.sensingstore.com/AppPod/Android/${{steps.getfilename.outputs.apk_filename}})
+          body: 点击下载 [${{needs.build.outputs.apk_filename}}](https://releases.sensingstore.com/AppPod/Android/${{needs.build.outputs.apk_filename}})
 
       
       - name: The job has success
@@ -120,7 +121,7 @@ jobs:
         run:  |
              curl '${{ secrets.DINGTALK_WEBHOOK}}' \
              -H 'Content-Type: application/json' \
-             -d '{"msgtype": "link","link": {"text": "${{steps.getfilename.outputs.apk_filename}} 发布", "title": "DevOps,信息发布系统",  "messageUrl": "https://releases.sensingstore.com/AppPod/Android/${{steps.getfilename.outputs.apk_filename}}" }}'
+             -d '{"msgtype": "link","link": {"text": "${{needs.build.outputs.apk_filename}} 发布", "title": "DevOps,信息发布系统",  "messageUrl": "https://releases.sensingstore.com/AppPod/Android/${{steps.getfilename.outputs.apk_filename}}" }}'
 
       
       - name: The job has failed
