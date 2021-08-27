@@ -37,6 +37,13 @@ jobs:
              cd keystore
              ls
              
+      - uses: actions/cache@v2
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/buildSrc/**/*.kt') }}
+             
       - name: Setup Java JDK
         uses: actions/setup-java@v2.2.0
         with:
