@@ -27,7 +27,7 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it    
       - name: test dinging
         run: |
-           curl 'https://oapi.dingtalk.com/robot/send?access_token=4d3c9ef2c386f9e327fe588fbc4d0ba59a7b9b2a0b8d0793a137cbaefd55d370'  -H 'Content-Type: application/json'   -d '{"msgtype": "link","link": {"text": "App:com.troncell.sample\nVersion: v3.0.0-beta01\nData:2021/8/30 ", "title": "%e5%bc%a0%e4%b8%89  release", "picUrl": "http://releases.sensingstore.com/AppPod/Android/sample/logo_launcher.png",  "messageUrl": "https://releases.sensingstore.com/AppPod/Android/sensingads/${{needs.build.outputs.apppod_apk_filename}}" }}'
+            curl 'https://oapi.dingtalk.com/robot/send?access_token=4d3c9ef2c386f9e327fe588fbc4d0ba59a7b9b2a0b8d0793a137cbaefd55d370'  -H 'Content-Type: application/json'   -d '{"msgtype": "link","link": {"text": "App:com.troncell.sample\nVersion: v3.0.0-beta01\nData:2021/8/30 ", "title": "安卓派机样机有新版本! release", "picUrl": "http://releases.sensingstore.com/AppPod/Android/sample/logo_launcher.png",  "messageUrl": "https://releases.sensingstore.com/AppPod/Android/sensingads/${{needs.build.outputs.apppod_apk_filename}}" }}'      
       - name: aa
         run: cd abc
       
