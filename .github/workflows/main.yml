@@ -25,18 +25,28 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it    
+      
       - name: test dinging
         run: |
             CURRENTDATE=`date +"%Y/%m/%d"`
             echo $CURRENTDATE
             curl 'https://oapi.dingtalk.com/robot/send?access_token=4d3c9ef2c386f9e327fe588fbc4d0ba59a7b9b2a0b8d0793a137cbaefd55d370'  -H 'Content-Type: application/json'   -d '{"msgtype": "link","link": {"text": "App:com.troncell.sample\nVersion: v3.0.0-beta01\nData:'$CURRENTDATE'", "title": "安卓派机样机有新版本! ", "picUrl": "http://releases.sensingstore.com/AppPod/Android/sample/logo_launcher.png",  "messageUrl": "https://releases.sensingstore.com/AppPod/Android/sensingads/${{needs.build.outputs.apppod_apk_filename}}" }}'
-      - name: aa
-        run: cd abc
+
       
       - uses: actions/checkout@v2
         with:
           submodules: true
           token: ${{secrets.ACCESS_TOKEN}}
+          
+
+        
+      - name: Read release note
+        run: |
+             CHANGELOG=`cat release-notes/2.0.0.md`
+             echo "$CHANGELOG"
+             
+      - name: error
+        run: cd abc
               
       - name: Check Keystore
         run: |
