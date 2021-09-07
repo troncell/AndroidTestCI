@@ -42,7 +42,7 @@ jobs:
         
       - name: Read release note
         run: |
-             CHANGELOG=`cat release-notes/2.0.0.md`
+             CHANGELOG=`cat release-notes/2.0.1.md`
              echo "$CHANGELOG"
              
       - name: error
